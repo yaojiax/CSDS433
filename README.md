@@ -15,7 +15,9 @@ Edge: A has an edge to B if B is one of the similar products of A
 
 Weight: Reviews of A
 
+project_preprocessdata.py - does the processing of the .txt file into the graph using NX
 
+project_check_data_graph.py - the data mining is done here
 
 Done as final project for CSDS 433 at Case Western Reserve University: Database Systems.
 
