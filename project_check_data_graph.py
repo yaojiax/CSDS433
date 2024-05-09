@@ -1,26 +1,20 @@
 import networkx as nx
 
-# Step 4: Read Graph from GraphML
 def read_graph(file_path):
     return nx.read_graphml(file_path)
 
 
-# Usage: Read the graph from the saved GraphML file
 graph_file_path = "graph_data.graphml"
 G = read_graph(graph_file_path)
 
-# Now you can use the graph G as needed
 print("Number of nodes:", G.number_of_nodes())
 print("Number of edges / G1 recommendations:", G.number_of_edges())
 print("Graph density:", nx.density(G))
 
-# Sort edges by weight
 sorted_edges = sorted(G.edges(data=True), key=lambda x: x[2]['weight'], reverse=True)
 
-# Get top 10 recommendations
 top_recommendations = sorted_edges[:10]
 
-# Print top 10 recommendations
 print("\nTop 10 Recommendations:")
 for i, (source, target, data) in enumerate(top_recommendations):
     print(f"{i + 1}. {source} -> {target}, Weight: {data['weight']}")
@@ -73,7 +67,6 @@ for i, (node, B, C, total_weight) in enumerate(split_recommendations[:10]):
 
 cascade_recommendations = find_cascade_recommendations(G)
 
-# Print the top 10 cascade recommendations
 print("\nTop 10 Cascade Recommendations:")
 for i, (A, (B, C)) in enumerate(cascade_recommendations[:10]):
     total_weight = sum([G[A][B]["weight"] for B in (B, C)])

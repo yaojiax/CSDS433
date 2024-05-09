@@ -26,8 +26,8 @@ def preprocess_data(file_path):
             elif line.startswith("salesrank:"):
                 current_product["salesrank"] = int(line.split()[1])
             elif line.startswith("similar:"):
-                similar_asins = line.split()[1:]
-                if similar_asins[0] != '0':  #similar ASINs
+                similar_asins = line.split()[2:]
+                if similar_asins:
                     current_product["similar"] = similar_asins
             elif line.startswith("categories:"):
                 categories = line.split("|")[1:]
@@ -60,12 +60,12 @@ def preprocess_data(file_path):
 def create_graph(data):
     G = nx.DiGraph()  #dirgraph
     for product in data:
-        G.add_node(product["title"])
+        G.add_node(product["ASIN"])
 
     for product in data:
         if "similar" in product:
-            for similar_asin in product["title"]:
-                G.add_edge(product["title"], similar_asin, weight=product["reviews"]["total"])
+            for similar_asin in product["similar"]:
+                G.add_edge(product["ASIN"], similar_asin, weight=product["reviews"]["total"])
 
     return G
 
@@ -82,39 +82,36 @@ def get_title_from_asin(data, asin):
     return "ASIN not found"
 
 
-asin_to_find = "0807281956"  
-title = get_title_from_asin(data, asin_to_find)
-print("Title:", title)
-
-asin_to_find = "0807286001"  
-title = get_title_from_asin(data, asin_to_find)
-print("Title:", title)
-
-
-asin_to_find = "0786222727"  
-title = get_title_from_asin(data, asin_to_find)
-print("Title:", title)
-
-
-asin_to_find = "0590353403"
-title = get_title_from_asin(data, asin_to_find)
-print("Title:", title)
-
-
-asin_to_find = "0807281751" 
-title = get_title_from_asin(data, asin_to_find)
-print("Title:", title)
-
-
-asin_to_find = "043936213X"  
-title = get_title_from_asin(data, asin_to_find)
-print("Title:", title)
-
-# asin_to_find = "B00005JMAH"  
+# asin_to_find = "0807281956"  
 # title = get_title_from_asin(data, asin_to_find)
 # print("Title:", title)
 
-# G = create_graph(data)
+# asin_to_find = "0807286001"  
+# title = get_title_from_asin(data, asin_to_find)
+# print("Title:", title)
 
-# graph_file_path = "graph_data2.graphml"
-# save_graph(G, graph_file_path)
+
+# asin_to_find = "0786222727"  
+# title = get_title_from_asin(data, asin_to_find)
+# print("Title:", title)
+
+
+# asin_to_find = "0590353403"
+# title = get_title_from_asin(data, asin_to_find)
+# print("Title:", title)
+
+
+# asin_to_find = "0807281751" 
+# title = get_title_from_asin(data, asin_to_find)
+# print("Title:", title)
+
+
+# asin_to_find = "043936213X"  
+# title = get_title_from_asin(data, asin_to_find)
+# print("Title:", title)
+
+
+G = create_graph(data)
+
+graph_file_path = "graph_data.graphml"
+save_graph(G, graph_file_path)
