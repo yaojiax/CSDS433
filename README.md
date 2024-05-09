@@ -21,3 +21,10 @@ project_check_data_graph.py - the data mining is done here
 
 Done as final project for CSDS 433 at Case Western Reserve University: Database Systems.
 
+Screenshots:
+
+![image](https://github.com/yaojiax/CSDS433/assets/60391595/840f3d43-b548-4423-99b0-6e083df17385)
+
+![image](https://github.com/yaojiax/CSDS433/assets/60391595/d683dbf5-4082-4b5f-8d56-fb8b31c5e1b5)
+
+
